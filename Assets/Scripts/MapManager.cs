@@ -19,12 +19,9 @@ public class MapManager : MonoBehaviour
 
     void RandomizeMap()
     {
-        for (int i = tileOffset; i < tileSize-tileOffset; i++)
+        for (int i = 0; i < 100; i++)
         {
-            for (int j = tileOffset; j < tileSize-tileOffset; j++)
-            {
-                ToggleState(Random.Range(tileOffset, tileSize - tileOffset), Random.Range(tileOffset, tileSize - tileOffset));
-            }
+              ToggleState(Random.Range(tileOffset, tileSize - tileOffset), Random.Range(tileOffset, tileSize - tileOffset));
         }
     }
 
@@ -74,51 +71,54 @@ public class MapManager : MonoBehaviour
         }
     }
 
-
-    int clamp(int val,int min,int max)
-    {
-        if (val < min)
-        {
-            return min;
-        }
-        if(val > max)
-        {
-            return max;
-        }
-        return val;
-    }
-
     bool CanLive(int i, int j)
     {
         int neighbourCount = 0;
-
-        for(int a = i-1; a < i+1; a++)
+        for (int a = i-1; a < i+1; a++)
         {
             for(int b = j-1; b < j+1; b++)
             {
-                if (a == i && b == j)
+                if ((a == i) && (b == j))
                 {
+                    //Debug.Log(a+" -x- "+b);
                     continue;
                 }
                 if (stateMap[a, b])
                 {
-                    Debug.Log("Alive Neighbour");
                     neighbourCount++;
                 }
             }
         }
 
-        Debug.Log(i+" "+ j+ " - "+neighbourCount);
-
-        if(neighbourCount < 2 || neighbourCount >3)
+        if(i == 1 && j == 18)
         {
-            return false;
+            Debug.Log("018 "+neighbourCount);
+        }
+
+        //Debug.Log(i+" "+ j+ " - "+neighbourCount);
+        if(!stateMap[i, j])
+        {
+            if (neighbourCount == 3)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
-            return true;
-        }
+            if (neighbourCount == 2 || neighbourCount == 3)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
+        }
     }
 
     void Process()
