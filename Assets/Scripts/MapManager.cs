@@ -19,10 +19,11 @@ public class MapManager : MonoBehaviour
 
     void RandomizeMap()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < tileSize*tileSize; i++)
         {
               ToggleState(Random.Range(tileOffset, tileSize - tileOffset), Random.Range(tileOffset, tileSize - tileOffset));
         }
+        ApplyStateMap();
     }
 
     void SetupMap()
@@ -56,7 +57,8 @@ public class MapManager : MonoBehaviour
 
     void ToggleState(int i,int j)
     {
-        stateMap[i, j] = !stateMap[i, j];
+        //stateMap[i, j] = !stateMap[i, j];
+        cubes[i, j].SetActive(!cubes[i, j].activeSelf);
     }
 
     void ApplyStateMap()
@@ -74,9 +76,11 @@ public class MapManager : MonoBehaviour
     bool CanLive(int i, int j)
     {
         int neighbourCount = 0;
-        for (int a = i-1; a < i+1; a++)
+        //Debug.Log((i-1) + " -x- " + (i+1));
+        //Debug.Log((j - 1) + " -x- " + (j + 1));
+        for (int a = i-1; a <= i+1; a++)
         {
-            for(int b = j-1; b < j+1; b++)
+            for(int b = j-1; b <= j+1; b++)
             {
                 if ((a == i) && (b == j))
                 {

@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b33f654fd0d8ab4bad9b1b0b2b7c5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSize: 20
+  tileSize: 30
   tileOffset: 1
   updateTime: 1000
 --- !u!4 &905001080
